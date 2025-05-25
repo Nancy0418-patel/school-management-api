@@ -1,0 +1,28 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 500px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+button {
+  padding: 10px 20px;
+  font-size: 1em;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+ul#schoolList {
+  list-style: none;
+  padding: 0;
+}
+ul#schoolList li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
