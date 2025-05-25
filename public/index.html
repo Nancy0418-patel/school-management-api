@@ -1,0 +1,47 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nearby Schools Finder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Find Nearby Schools</h2>
+    <button onclick="getLocation()">Get Schools Near Me</button>
+    <ul id="schoolList"></ul>
+  </div>
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          // Call your backend API
+          const response = await fetch(`http://localhost:3000/listSchools?latitude=${lat}&longitude=${lon}`);
+          const schools = await response.json();
+
+          // Display Results
+          const list = document.getElementById("schoolList");
+          list.innerHTML = '';
+          if (schools.length === 0) {
+            list.innerHTML = '<li>No schools found nearby.</li>';
+          }
+          schools.forEach(school => {
+            const li = document.createElement('li');
+            li.textContent = `${school.name} - ${school.address} (${school.distance.toFixed(2)} km)`;
+            list.appendChild(li);
+          });
+        }, () => {
+          alert("Unable to retrieve your location.");
+        });
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+  </script>
+</body>
+</html>
